@@ -7,10 +7,12 @@ class App extends Component {
 
     state = {
         person: [
-            { name: 'Max', age: 21 },
-            { name: 'Mark', age: 12 },
-            { name: 'Mary', age: 29 },
-        ]
+            { id: 'sdf23', name: 'Max', age: 21 },
+            { id: 'sadfg2', name: 'Mark', age: 12 },
+            { id: 'kughhu78', name: 'Mary', age: 29 },
+        ],
+        otherState: 'some value here',
+        showPersons: false
     };
     
     switchNameHandler = (newName) => {
@@ -23,6 +25,17 @@ class App extends Component {
         });
     };
 
+    deletePersonHandler = (personIndex) => {
+        // slice the array to prevent bugs. slice() will make a copy of the array and not mutate the original state
+        // const persons = this.state.person.slice();
+
+        // es7 version using spread operator
+        const persons = [...this.state.person]
+        console.log(persons);
+        persons.splice(personIndex, 1);
+        this.setState({ person: persons });
+    };
+
     nameChagedHandler = (event) => {
         this.setState({
             person: [
@@ -31,25 +44,47 @@ class App extends Component {
                 { name: 'David', age: 29 },
             ]
         });
-    }
+    };
+
+    togglePersonHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({ showPersons: !doesShow });
+    };
 
     render() {
 
-         const style = {
-             backgroundColor: 'white',
-             font: 'inherit',
-             border: '1px solid blue',
-             padding: '8px',
-             cursor: 'pointer',
-         };
+        const style = {
+            backgroundColor: 'white',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px',
+            cursor: 'pointer',
+        };
+
+        let persons = null;
+
+        if (this.state.showPersons) {
+            persons = (
+                <div>
+                    {this.state.person.map((person, index) => {
+                        return <Person 
+                            click={() => this.deletePersonHandler(index)} 
+                            name={person.name} 
+                            age={person.age}
+                            key={person.id}
+                            />
+                    })}
+                </div>
+            );
+    };
 
         return (
             <div className="App">
                 <h1>Hi I'm a React App</h1>
-                <button style={style} onClick={() => this.switchNameHandler('Maximilian')}>Change Name</button>
-                <Person name={this.state.person[0].name} age={this.state.person[0].age}/>
-                <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.switchNameHandler.bind(this, 'Maximilian')} changed={this.nameChagedHandler}>My Hobbies: Racing</Person>
-                <Person name={this.state.person[2].name} age={this.state.person[2].age}/>
+                <button 
+                    style={style} 
+                    onClick={this.togglePersonHandler}>Toggle Persons</button>
+                {persons}
             </div>
         );
     };
@@ -65,7 +100,6 @@ export default App;
 
 
  
-
 
 
 
