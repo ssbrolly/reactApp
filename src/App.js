@@ -12,7 +12,7 @@ class App extends Component {
             { id: 'kughhu78', name: 'Mary', age: 29 },
         ],
         otherState: 'some value here',
-        showPersons: false
+        showPersons: true
     };
     
     switchNameHandler = (newName) => {
@@ -47,8 +47,8 @@ class App extends Component {
     };
 
     togglePersonHandler = () => {
-        const doesShow = this.state.showPersons;
-        this.setState({ showPersons: !doesShow });
+        // const doesShow = this.state.showPersons;
+        this.setState({ showPersons: !this.state.showPersons});
     };
 
     render() {
@@ -76,10 +76,10 @@ class App extends Component {
                     })}
                 </div>
             );
-    };
+        };
 
         return (
-            <div className="App">
+             <div className="App">
                 <h1>Hi I'm a React App</h1>
                 <button 
                     style={style} 
@@ -99,7 +99,20 @@ export default App;
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
