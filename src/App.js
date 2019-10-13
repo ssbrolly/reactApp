@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 // import { directive } from '@babel/types';
 import Person from './Person/Person'
+import { throwStatement } from '@babel/types';
 
 class App extends Component {
 
@@ -31,23 +32,34 @@ class App extends Component {
 
         // es7 version using spread operator
         const persons = [...this.state.person]
-        console.log(persons);
         persons.splice(personIndex, 1);
         this.setState({ person: persons });
     };
 
-    nameChagedHandler = (event) => {
-        this.setState({
-            person: [
-                { name: 'Max', age: 21 },
-                { name: event.target.value, age: 12 },
-                { name: 'David', age: 29 },
-            ]
-        });
+    nameChagedHandler = (event, id) => {
+
+        // Get the Index of the person that matches the id; 
+        const personIndex = this.state.person.findIndex(p => p.id === id);
+
+        // Do not mutate the state object directly, Use spread operator to make a copy of the object
+        const person = {...this.state.person[personIndex]};
+
+        // Set the person.name to the value passed in the input field;
+        person.name = event.target.value;
+
+        // Do not mutate the state object directly using spread operator to make a copy of the object;
+        const persons = [...this.state.person];
+
+        // Set the person at the index to the person identified by the id
+        persons[personIndex] = person;
+
+        //update the state;
+        this.setState({ person: persons });
     };
 
     togglePersonHandler = () => {
         // const doesShow = this.state.showPersons;
+        // toggle showPerson boolean
         this.setState({ showPersons: !this.state.showPersons});
     };
 
@@ -63,6 +75,7 @@ class App extends Component {
 
         let persons = null;
 
+        // to render jsx () is needed
         if (this.state.showPersons) {
             persons = (
                 <div>
@@ -72,7 +85,8 @@ class App extends Component {
                             name={person.name} 
                             age={person.age}
                             key={person.id}
-                            />
+                            changed={(event) => this.nameChagedHandler(event, person.id)}
+                        />
                     })}
                 </div>
             );
@@ -91,7 +105,6 @@ class App extends Component {
 };
 
 export default App;
-
 
 
 
