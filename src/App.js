@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 // import { directive } from '@babel/types';
 import Person from './Person/Person'
-import { throwStatement } from '@babel/types';
 
 class App extends Component {
 
@@ -38,22 +37,12 @@ class App extends Component {
 
     nameChagedHandler = (event, id) => {
 
-        // Get the Index of the person that matches the id; 
         const personIndex = this.state.person.findIndex(p => p.id === id);
-
-        // Do not mutate the state object directly, Use spread operator to make a copy of the object
         const person = {...this.state.person[personIndex]};
-
-        // Set the person.name to the value passed in the input field;
         person.name = event.target.value;
-
-        // Do not mutate the state object directly using spread operator to make a copy of the object;
         const persons = [...this.state.person];
-
-        // Set the person at the index to the person identified by the id
         persons[personIndex] = person;
 
-        //update the state;
         this.setState({ person: persons });
     };
 
