@@ -49,22 +49,13 @@ class App extends Component {
     togglePersonHandler = () => {
         // const doesShow = this.state.showPersons;
         // toggle showPerson boolean
-        this.setState({ showPersons: !this.state.showPersons});
+        this.setState({ showPersons: !this.state.showPersons });
     };
 
     render() {
 
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer',
-        
-        };
-
         let persons = null;
+        let btnClass = '';
 
         // to render jsx () is needed
         if (this.state.showPersons) {
@@ -81,9 +72,8 @@ class App extends Component {
                     })}
                 </div>
             );
-            style.backgroundColor = 'red'
+            btnClass = classes.Red;
         };
-
 
         //Dynamic css rendering
         const assignedClasses = [];
@@ -100,7 +90,7 @@ class App extends Component {
                 <h1>Hi I'm a React App</h1>
                 <p className={assignedClasses.join(' ')}>This is Really Working</p>
                 <button 
-                    style={style} 
+                    className={btnClass}
                     onClick={this.togglePersonHandler}>Toggle Persons</button>
                 {persons}
             </div>
@@ -110,12 +100,6 @@ class App extends Component {
 };
 
 export default App;
-
-
-
-
-
-
 
 
 
