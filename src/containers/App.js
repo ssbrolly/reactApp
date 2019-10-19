@@ -5,6 +5,11 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
+    constructor(props) {
+        super(props); 
+        console.log('[App.js] constructor'); 
+    }
+
     state = {
         person: [
             { id: 'sdf23', name: 'Max', age: 21 },
@@ -12,9 +17,18 @@ class App extends Component {
             { id: 'kughhu78', name: 'Mary', age: 29 },
         ],
         otherState: 'some value here',
-        showPersons: true
+        showPersons: false
     };
     
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props)
+        return state;
+    };
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    };
+
     switchNameHandler = (newName) => {
         this.setState({
             person: [
@@ -52,6 +66,7 @@ class App extends Component {
     };
 
     render() {
+        console.log('[App.js] ....render');
 
         let persons = null;
 
