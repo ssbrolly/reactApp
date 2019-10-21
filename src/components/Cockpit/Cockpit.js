@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
 
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+    });
+    
     //Dynamic css rendering
     const assignedClasses = [];
 
@@ -30,7 +34,7 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+export default Cockpit;
 
 
 

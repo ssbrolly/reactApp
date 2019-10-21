@@ -29,6 +29,15 @@ class App extends Component {
         console.log('[App.js] componentDidMount');
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[App.js shouldcomponentUpdate]');
+        return true;
+    };
+
+    componentDidUpdate() {
+        console.log('[App.js] componentDidUpdate');
+    };
+
     switchNameHandler = (newName) => {
         this.setState({
             person: [
@@ -97,8 +106,6 @@ class App extends Component {
 };
 
 export default App;
-
-
 
 
 
