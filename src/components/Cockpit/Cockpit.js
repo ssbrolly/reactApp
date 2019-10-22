@@ -1,13 +1,27 @@
 import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
-
+import Aux from '../../hoc/Aux';
 
 const Cockpit = (props) => {
 
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
+        setTimeout(()=> {
+            alert('Saved something to the cloud');
+        }, 1000)
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return () => {
+            console.log('[Cockpit.js] 2nd cleanup work in progress');
+
+        }
     });
-    
+
     //Dynamic css rendering
     const assignedClasses = [];
 
@@ -16,17 +30,17 @@ const Cockpit = (props) => {
         btnClass = classes.Red;
     }
 
-    if (props.person.length <= 2) {
+    if (props.personLength <= 2) {
         assignedClasses.push(classes.red); //assignedClasses = ['red']
     };
-    if (props.person.length <= 1) {
+    if (props.personLength <= 1) {
         assignedClasses.push(classes.bold); //assignedClasses = ['red', 'bold]
     };
 
     return (
         <div className={classes.Cockpit}>
             <h1>{props.title}</h1>
-            <p className={assignedClasses.join(' ')}>This is Really Working</p>
+            <p className={assignedClasses.join(' ')}>Hello World!</p>
             <button
                 className={btnClass}
                 onClick={props.click}>Toggle Persons</button>
@@ -34,7 +48,7 @@ const Cockpit = (props) => {
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);
 
 
 
