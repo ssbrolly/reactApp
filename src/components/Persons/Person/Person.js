@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './Person.module.css';
+// import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux';
 
 

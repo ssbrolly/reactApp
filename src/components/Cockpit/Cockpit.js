@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
-import Aux from '../../hoc/Aux';
+// import Aux from '../../hoc/Aux';
 
 const Cockpit = (props) => {
 
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
-        setTimeout(()=> {
-            alert('Saved something to the cloud');
-        }, 1000)
+        // setTimeout(()=> {
+        //     alert('Saved something to the cloud');
+        // }, 1000)
         return () => {
             console.log('[Cockpit.js] cleanup work in useEffect');
         }
