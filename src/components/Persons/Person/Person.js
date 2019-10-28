@@ -4,13 +4,12 @@ import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
 
-
 class Person extends Component { 
 
     constructor(props) {
         super(props)
         this.inputElementRef = React.createRef();
-    }
+    }; 
 
     componentDidMount() {
         // this.inputElement.focus();

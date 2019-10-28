@@ -4,6 +4,8 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux';
+import { throwStatement } from '@babel/types';
+import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
 
 class App extends Component {
@@ -23,6 +25,7 @@ class App extends Component {
         showPersons: false,
         showCockpit: true,
         changeCounter: 0,
+        authenticated: false,
     };
     
     static getDerivedStateFromProps(props, state) {
@@ -83,6 +86,10 @@ class App extends Component {
         this.setState({ showPersons: !doesShow});
     };
 
+    loginHandler = () => {
+        this.setState({authenticated: true});
+    }
+
     render() {
         console.log('[App.js] ....render');
 
@@ -106,12 +113,13 @@ class App extends Component {
                     showPersons={this.state.showPersons}
                     personLength={this.state.person.length}
                     click={this.togglePersonHandler}
+                    login={this.loginHandler}
                 /> : null}
 
                 {persons}
             </Aux>
         );
-    };
+    }; 
 };
 
 export default withClass(App, classes.App);
