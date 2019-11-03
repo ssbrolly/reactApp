@@ -4,8 +4,6 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux';
-import { throwStatement } from '@babel/types';
-import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
 
 class App extends Component {
@@ -101,6 +99,7 @@ class App extends Component {
                         person={this.state.person}
                         clicked={this.deletePersonHandler} 
                         changed={this.nameChagedHandler} 
+                        isAuthenticated={this.state.authenticated}
                     />
               
         };
@@ -115,7 +114,6 @@ class App extends Component {
                     click={this.togglePersonHandler}
                     login={this.loginHandler}
                 /> : null}
-
                 {persons}
             </Aux>
         );
